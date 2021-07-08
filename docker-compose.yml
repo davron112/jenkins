@@ -1,8 +1,9 @@
 version: '3.5'
-services:
+
 networks:
   backend:
     driver: ${NETWORKS_DRIVER}
+services:
   ### Jenkins ###################################################
   jenkins:
     build: ./jenkins
