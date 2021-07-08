@@ -1,13 +1,14 @@
 version: '3.5'
-
 services:
-
-### Jenkins ###################################################
+networks:
+  backend:
+    driver: ${NETWORKS_DRIVER}
+  ### Jenkins ###################################################
   jenkins:
     build: ./jenkins
     environment:
-    JAVA_OPTS: "-Djava.awt.headless=true"
-    ports:product_list
+      JAVA_OPTS: "-Djava.awt.headless=true"
+    ports:
       - "${JENKINS_HOST_SLAVE_AGENT_PORT}:50000"
       - "${JENKINS_HOST_HTTP_PORT}:8080"
     privileged: true
@@ -15,5 +16,4 @@ services:
       - ${JENKINS_HOME}:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
-      - frontend
       - backend
